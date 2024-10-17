@@ -1,30 +1,47 @@
 import java.util.NoSuchElementException;
 
+import edu.grinnell.csc207.util.AssociativeArray;
+import edu.grinnell.csc207.util.KeyNotFoundException;
+import edu.grinnell.csc207.util.NullKeyException;
+
 /**
  * Represents the mappings for a single category of items that should
  * be displayed
  * 
- * @author Catie Baker & YOUR NAME HERE
+ * @author Catie Baker & A.J. Trimble
  *
  */
 public class AACCategory implements AACPage {
 
+	/*
+	 * Fields 
+	 */
+
+	 String category = "default";
+	 AssociativeArray<String, String> imageArr = new AssociativeArray<>();
 	
 	/**
 	 * Creates a new empty category with the given name
 	 * @param name the name of the category
 	 */
 	public AACCategory(String name) {
-
+		category = name;
 	}
 	
+
+
 	/**
 	 * Adds the image location, text pairing to the category
 	 * @param imageLoc the location of the image
 	 * @param text the text that image should speak
 	 */
 	public void addItem(String imageLoc, String text) {
-
+		try {
+			imageArr.set(imageLoc, text);
+		} catch (NullKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -33,7 +50,7 @@ public class AACCategory implements AACPage {
 	 * it should return an empty array
 	 */
 	public String[] getImageLocs() {
-		return null;
+		return imageArr.keyList(); // STUB
 	}
 
 	/**
@@ -41,7 +58,7 @@ public class AACCategory implements AACPage {
 	 * @return the name of the category
 	 */
 	public String getCategory() {
-		return "";
+		return category;  // STUB
 	}
 
 	/**
@@ -52,7 +69,13 @@ public class AACCategory implements AACPage {
 	 * 		   category
 	 */
 	public String select(String imageLoc) {
-		return "";
+		try {
+			return imageArr.get(imageLoc);
+		} catch (KeyNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+             return null;
 	}
 
 	/**
@@ -61,6 +84,6 @@ public class AACCategory implements AACPage {
 	 * @return true if it is in the category, false otherwise
 	 */
 	public boolean hasImage(String imageLoc) {
-		return false;
+		return imageArr.hasKey(imageLoc);
 	}
 }

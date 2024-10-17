@@ -23,6 +23,8 @@ import javax.speech.Central;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 
+
+
 /**
  * Creates a GUI that has a grid of images that represent the communication
  * device of the AAC.
@@ -49,8 +51,8 @@ public class AAC implements ActionListener {
 	 *                 will be in the AAC
 	 */
 	public AAC(String filename) {
-		this.page = new AACCategory("test");
-		// this.page = new AACMappings(filename);
+		//this.page = new AACCategory("test");
+		this.page = new AACMappings(filename);
 		this.images = this.page.getImageLocs();
 		this.startIndex = 0;
 		this.endIndex = Math.min(NUM_ACROSS * NUM_DOWN, this.images.length);
